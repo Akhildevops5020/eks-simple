@@ -116,40 +116,31 @@ provider "helm" {
 }
 
 resource "helm_release" "grafana_dev" {
+  provider   = helm.dev
   name       = "grafana-dev"
   repository = "https://grafana.github.io/helm-charts"
   chart      = "grafana"
   namespace  = "grafana-dev"
 
   create_namespace = true
-
-  providers = {
-    helm = helm.dev
-  }
 }
 
 resource "helm_release" "grafana_stage" {
+  provider   = helm.stage
   name       = "grafana-stage"
   repository = "https://grafana.github.io/helm-charts"
   chart      = "grafana"
   namespace  = "grafana-stage"
 
   create_namespace = true
-
-  providers = {
-    helm = helm.stage
-  }
 }
 
 resource "helm_release" "grafana_prod" {
+  provider   = helm.prod
   name       = "grafana-prod"
   repository = "https://grafana.github.io/helm-charts"
   chart      = "grafana"
   namespace  = "grafana-prod"
 
   create_namespace = true
-
-  providers = {
-    helm = helm.prod
-  }
 }
