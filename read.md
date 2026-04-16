@@ -1,23 +1,15 @@
-# Simple EKS Cluster using Terraform
+# Simple Multi-Environment EKS Deployment
 
-## Prerequisites
-- Terraform installed
-- AWS CLI configured
-- kubectl installed
+## Overview
+- `main.tf` configures AWS, defines three environments (dev/stage/prod), and instantiates VPC + EKS modules once per environment.
+- `variable.tf` declares shared inputs like AWS region and the base cluster name.
+- `terraform.tfvars` supplies default values for those variables.
+- `outputs.tf` exposes the cluster names and endpoints for each environment.
+- `.terraform.lock.hcl` pins provider versions; `.gitignore` excludes state files.
 
-## Steps to Run
-
-1. Initialize Terraform
-terraform init
-
-2. Plan
-terraform plan
-
-3. Apply
-terraform apply
-
-4. Connect to EKS
-aws eks update-kubeconfig --region ap-south-1 --name simple-eks-cluster
-
-5. Verify
-kubectl get nodes
+## Usage
+1. Initialize providers/modules: `terraform init`
+2. Review changes: `terraform plan`
+3. Apply infrastructure: `terraform apply`
+4. Update kubeconfig (example for dev): `aws eks update-kubeconfig --region ap-south-1 --name <base-name>-dev`
+5. Verify nodes: `kubectl get nodes`

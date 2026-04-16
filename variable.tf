@@ -4,6 +4,6 @@ variable "region" {
 }
 
 variable "cluster_name" {
-  description = "EKS Cluster Name"
+  description = "Base name used when creating per-environment EKS clusters"
   default     = "simple-eks-cluster"
 }
